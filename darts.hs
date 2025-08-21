@@ -1,12 +1,13 @@
 optRemainder :: Int -> Int
 optRemainder n = [2^(x-1) | x <- [1..], 2^x - n > 0] !! 0
+-- Finds the largest power of 2 less than n to get the remainder than will take down to a power of 2
 
 dart :: Int -> [String] -> [String]
 dart 0 _ = ["0"]
 dart 1 _ = ["BUST"]
 dart x xs
     | x <= 40 && even x = show (div x 2):"D":xs
-    | x <= 40 && odd x = dart (optRemainder x) (" ":show (x-optRemainder x):xs)
+    | x <= 52 = dart (optRemainder x) (" ":show (x-optRemainder x):xs)
     | x == 50 = "BULL":xs
     | x <= 60 = dart 40 (" ":show (x-40):xs)
     | x <= 70 = dart 50 (" ":show (x-50):xs)
